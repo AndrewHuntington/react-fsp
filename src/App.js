@@ -1,5 +1,7 @@
+// TODO: Replace w/API call
 import cardData from "./data/data";
-import { useEffect, useState } from "react";
+import Pagination from "./components/Pagination";
+import { useEffect, useState, useMemo, useCallback } from "react";
 
 function Card({ name, created, status }) {
   return (
@@ -17,57 +19,77 @@ function App() {
   const [filteredList, setFilteredList] = useState(cardData);
   const [selectedFilter, setSelectedFilter] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
+  const [applications, setApplications] = useState([]);
 
-  const sortByCreated = (filteredData) => {
-    if (!selectedSort) {
-      return filteredData;
-    }
+  const applicationList = useMemo(
+    () =>
+      filteredList.map((item, index) => (
+        <Card
+          name={item.name}
+          created={item.created}
+          status={item.status}
+          key={index}
+        />
+      )),
+    [filteredList]
+  );
 
-    // ! NOTE: sort() sorts element of an array in place
-    // ! unlike map() which returns a new array
-    const dataCopy = [...filteredData];
-
-    const sortedData = dataCopy.sort((a, b) => {
-      // * Old code kept for reference
-      // a = a.created.split("-").join("");
-      // b = b.created.split("-").join("");
-      a = new Date(a.created);
-      b = new Date(b.created);
-
-      // sort by date oldest first (ascending)
-      if (selectedSort === "oldest") {
-        // return a.localeCompare(b);
-        return a - b;
-      }
-      // sort by date newest first (descending)
-      if (selectedSort === "newest") {
-        // return b.localeCompare(a);
-        return b - a;
+  const sortByCreated = useCallback(
+    () => (filteredData) => {
+      console.log("sorting...");
+      if (!selectedSort) {
+        return filteredData;
       }
 
-      return dataCopy;
-    });
+      // ! NOTE: sort() sorts element of an array in place
+      // ! unlike map() which returns a new array
+      const dataCopy = [...filteredData];
 
-    console.log(sortedData);
+      const sortedData = dataCopy.sort((a, b) => {
+        // * Old code kept for reference
+        // a = a.created.split("-").join("");
+        // b = b.created.split("-").join("");
+        a = new Date(a.created);
+        b = new Date(b.created);
 
-    return sortedData;
-  };
+        // sort by date oldest first (ascending)
+        if (selectedSort === "oldest") {
+          // return a.localeCompare(b);
+          return a - b;
+        }
+        // sort by date newest first (descending)
+        if (selectedSort === "newest") {
+          // return b.localeCompare(a);
+          return b - a;
+        }
+
+        return dataCopy;
+      });
+
+      return sortedData;
+    },
+    [selectedSort]
+  );
 
   const handleSort = (e) => {
     setSelectedSort(e.target.value);
   };
 
-  const filterByStatus = (filteredData) => {
-    if (!selectedFilter) {
-      return filteredData;
-    }
+  const filterByStatus = useCallback(
+    () => (filteredData) => {
+      console.log("filtering...");
+      if (!selectedFilter) {
+        return filteredData;
+      }
 
-    // ! NOTE: filter() creates a shallow copy of a portion of an array
-    const filteredApps = filteredData.filter(
-      (app) => app.status === selectedFilter
-    );
-    return filteredApps;
-  };
+      // ! NOTE: filter() creates a shallow copy of a portion of an array
+      const filteredApps = filteredData.filter(
+        (app) => app.status === selectedFilter
+      );
+      return filteredApps;
+    },
+    [selectedFilter]
+  );
 
   const handleFilter = (e) => {
     setSelectedFilter(e.target.value);
@@ -77,7 +99,14 @@ function App() {
     let filteredData = filterByStatus(cardData);
     filteredData = sortByCreated(filteredData);
     setFilteredList(filteredData);
-  }, [selectedFilter, selectedSort]);
+    setApplications(applicationList);
+  }, [
+    selectedFilter,
+    selectedSort,
+    applicationList,
+    filterByStatus,
+    sortByCreated,
+  ]);
 
   return (
     <div>
@@ -109,15 +138,14 @@ function App() {
         </select>
       </div>
 
-      {filteredList &&
-        filteredList.map((item, index) => (
-          <Card
-            name={item.name}
-            created={item.created}
-            status={item.status}
-            key={index}
-          />
-        ))}
+      <Pagination
+        data={applications}
+        renderOnZeroPageCount={null}
+        nextLabel=">"
+        previousLabel="<"
+        breakLabel="..."
+        itemsPerPage={10}
+      />
     </div>
   );
 }
