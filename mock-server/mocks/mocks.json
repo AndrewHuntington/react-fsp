@@ -1,0 +1,18 @@
+[
+  {
+    "id": "base",
+    "routesVariants": [
+      "get-applications:success",
+      "get-application:success",
+      "get-env:success"
+    ]
+  },
+  {
+    "id": "error",
+    "routesVariants": [
+      "get-applications:error",
+      "get-application:error",
+      "get-env:error"
+    ]
+  }
+]
