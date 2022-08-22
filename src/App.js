@@ -28,19 +28,27 @@ function App() {
     const dataCopy = [...filteredData];
 
     const sortedData = dataCopy.sort((a, b) => {
-      a = a.created.split("-").join("");
-      b = b.created.split("-").join("");
+      // * Old code kept for reference
+      // a = a.created.split("-").join("");
+      // b = b.created.split("-").join("");
+      a = new Date(a.created);
+      b = new Date(b.created);
+
       // sort by date oldest first (ascending)
       if (selectedSort === "oldest") {
-        return a.localeCompare(b);
+        // return a.localeCompare(b);
+        return a - b;
       }
       // sort by date newest first (descending)
       if (selectedSort === "newest") {
-        return b.localeCompare(a);
+        // return b.localeCompare(a);
+        return b - a;
       }
 
       return dataCopy;
     });
+
+    console.log(sortedData);
 
     return sortedData;
   };

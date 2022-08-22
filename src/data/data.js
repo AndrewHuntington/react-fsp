@@ -20,7 +20,7 @@ const data = [
   {
     id: 4,
     name: "John Dear",
-    created: "2018-01-01 24:23:21",
+    created: "2018-01-01 00:23:21",
     status: "active",
   },
   {
@@ -38,7 +38,7 @@ const data = [
   {
     id: 7,
     name: "John Dear",
-    created: "2018-01-10 24:23:00",
+    created: "2018-01-10 00:23:00",
     status: "active",
   },
   {
@@ -56,7 +56,7 @@ const data = [
   {
     id: 10,
     name: "John Dearz",
-    created: "2018-01-01 24:23:21",
+    created: "2018-01-01 00:23:21",
     status: "active",
   },
   {
@@ -74,7 +74,7 @@ const data = [
   {
     id: 13,
     name: "John Dear",
-    created: "2018-12-11 24:23:21",
+    created: "2018-12-11 00:23:21",
     status: "active",
   },
   {
@@ -110,7 +110,7 @@ const data = [
   {
     id: 19,
     name: "John Dear",
-    created: "2018-01-03 24:25:21",
+    created: "2018-01-01 00:25:21",
     status: "active",
   },
   {
@@ -128,7 +128,7 @@ const data = [
   {
     id: 22,
     name: "John Dear",
-    created: "2021-02-01 24:00:21",
+    created: "2021-02-01 00:00:21",
     status: "active",
   },
   {
