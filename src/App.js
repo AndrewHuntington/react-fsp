@@ -1,19 +1,20 @@
 // TODO: Replace w/API call
 import cardData from "./data/data";
 import Pagination from "./components/Pagination";
+import Card from "./components/Card";
 import { useEffect, useState, useMemo, useCallback } from "react";
 
-function Card({ name, created, status }) {
-  return (
-    <div className=" max-w-fit">
-      <div className="border border-red-500 rounded">
-        <h1>{name}</h1>
-        <p>{created}</p>
-        <p>{status}</p>
-      </div>
-    </div>
-  );
-}
+// function Card({ name, created, status }) {
+//   return (
+//     <div className=" max-w-fit">
+//       <div className="border border-red-500 rounded">
+//         <h1>{name}</h1>
+//         <p>{created}</p>
+//         <p>{status}</p>
+//       </div>
+//     </div>
+//   );
+// }
 
 function App() {
   const [filteredList, setFilteredList] = useState(cardData);
