@@ -3,7 +3,7 @@ import cardData from "./data/data";
 import ApplicationList from "./components/ApplicationList";
 
 function App() {
-  return <ApplicationList applicationsData={cardData} />;
+  return <ApplicationList applicationsDataRaw={cardData} />;
 }
 
 export default App;

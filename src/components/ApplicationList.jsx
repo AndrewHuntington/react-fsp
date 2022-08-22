@@ -3,8 +3,8 @@ import Card from "./Card";
 import Pagination from "./Pagination";
 import useApplicationList from "../hooks/useApplicationList";
 
-function ApplicationList({ applicationsData }) {
-  const [filteredList, setFilteredList] = useState(applicationsData);
+function ApplicationList({ applicationsDataRaw }) {
+  const [filteredList, setFilteredList] = useState(applicationsDataRaw);
   const [selectedFilter, setSelectedFilter] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
   const [applications, setApplications] = useState([]);
@@ -16,7 +16,7 @@ function ApplicationList({ applicationsData }) {
     itemsPerPage,
   });
 
-  const applicationList = useMemo(
+  const applicationsList = useMemo(
     () =>
       filteredList.map((item, index) => (
         <Card
@@ -29,7 +29,7 @@ function ApplicationList({ applicationsData }) {
     [filteredList]
   );
 
-  const sortByCreated = useCallback(
+  const sortByCreated = useMemo(
     () => (filteredData) => {
       console.log("sorting...");
       if (!selectedSort) {
@@ -65,9 +65,8 @@ function ApplicationList({ applicationsData }) {
     setSelectedSort(e.target.value);
   };
 
-  const filterByStatus = useCallback(
+  const filterByStatus = useMemo(
     () => (filteredData) => {
-      console.log("filtering...");
       if (!selectedFilter) {
         return filteredData;
       }
@@ -86,17 +85,20 @@ function ApplicationList({ applicationsData }) {
   };
 
   useEffect(() => {
-    let filteredData = filterByStatus(applicationsData);
+    setApplications(applicationsList);
+    console.log(applicationsList);
+  }, [applicationsList]);
+
+  useEffect(() => {
+    let filteredData = filterByStatus(applicationsDataRaw);
     filteredData = sortByCreated(filteredData);
     setFilteredList(filteredData);
-    setApplications(applicationList);
   }, [
     selectedFilter,
     selectedSort,
-    applicationList,
     filterByStatus,
     sortByCreated,
-    applicationsData,
+    applicationsDataRaw,
   ]);
 
   return (
@@ -151,7 +153,7 @@ function ApplicationList({ applicationsData }) {
         nextLabel=">"
         previousLabel="<"
         breakLabel="..."
-        itemsPerPage={itemsPerPage}
+        className="flex space-x-2"
       />
     </div>
   );
