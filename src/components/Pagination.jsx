@@ -8,14 +8,13 @@ function Pagination({
   renderOnZeroPageCount,
   pageRangeDisplayed = 2,
   marginPagesDisplayed = 1,
+  nextLabel,
+  previousLabel,
+  breakLabel,
   className,
   activeClassName,
   pageClassName,
   breakClassName,
-  nextLabel,
-  previousLabel,
-  breakLabel,
-  itemsPerPage,
   itemsContainerClassName,
 }) {
   return (
@@ -27,6 +26,8 @@ function Pagination({
       breakLabel={breakLabel}
       marginPagesDisplayed={marginPagesDisplayed}
       pageRangeDisplayed={pageRangeDisplayed}
+      renderOnZeroPageCount={renderOnZeroPageCount}
+      className={className}
     />
   );
 }
