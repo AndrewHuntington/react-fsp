@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Filter, Sort, and Paginate App
+
+A simple project to practice filtering, sorting, and paginating data.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
