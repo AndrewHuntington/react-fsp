@@ -35,7 +35,6 @@ function ApplicationList() {
 
   const sortByCreated = useMemo(
     () => (filteredData) => {
-      console.log("sorting...");
       if (!selectedSort) {
         return filteredData;
       }
@@ -90,7 +89,6 @@ function ApplicationList() {
 
   useEffect(() => {
     setApplications(applicationsList);
-    console.log(applicationsList);
   }, [applicationsList, setApplications]);
 
   useEffect(() => {
