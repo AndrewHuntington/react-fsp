@@ -149,13 +149,14 @@ function ApplicationList() {
       </div>
 
       <Pagination
-        handlePageClick={handlePageClick}
+        onPageChange={handlePageClick}
         pageCount={pageCount}
         renderOnZeroPageCount={null}
         nextLabel=">"
         previousLabel="<"
         breakLabel="..."
         className="flex space-x-2"
+        activeClassName="font-bold"
       />
     </div>
   );

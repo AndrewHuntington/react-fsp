@@ -31,6 +31,7 @@ function useApplicationList({ itemsPerPage }) {
   }, [itemOffset, itemsPerPage, applications]);
 
   const handlePageClick = (e) => {
+    console.log("clicked!", e);
     const newOffset = (e.selected * itemsPerPage) % applications.length;
     setItemOffset(newOffset);
   };

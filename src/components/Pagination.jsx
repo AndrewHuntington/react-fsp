@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 
 function Pagination({
   pageCount,
-  handlePageClick,
+  onPageChange,
   onPageActive,
   renderOnZeroPageCount,
   pageRangeDisplayed = 2,
@@ -19,7 +19,7 @@ function Pagination({
 }) {
   return (
     <ReactPaginate
-      onPageChange={handlePageClick}
+      onPageChange={onPageChange}
       pageCount={pageCount}
       nextLabel={nextLabel}
       previousLabel={previousLabel}
@@ -28,6 +28,7 @@ function Pagination({
       pageRangeDisplayed={pageRangeDisplayed}
       renderOnZeroPageCount={renderOnZeroPageCount}
       className={className}
+      activeClassName={activeClassName}
     />
   );
 }
