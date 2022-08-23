@@ -1,18 +1,22 @@
-import React, { useCallback, useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
 import useApplicationList from "../hooks/useApplicationList";
 
-function ApplicationList({ applicationsDataRaw }) {
-  const [filteredList, setFilteredList] = useState(applicationsDataRaw);
+function ApplicationList() {
+  const [filteredList, setFilteredList] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
-  const [applications, setApplications] = useState([]);
 
   const itemsPerPage = 10;
 
-  const { currentItems, handlePageClick, pageCount } = useApplicationList({
-    applications,
+  const {
+    currentItems,
+    handlePageClick,
+    pageCount,
+    setApplications,
+    applicationsDataRaw,
+  } = useApplicationList({
     itemsPerPage,
   });
 
@@ -87,7 +91,7 @@ function ApplicationList({ applicationsDataRaw }) {
   useEffect(() => {
     setApplications(applicationsList);
     console.log(applicationsList);
-  }, [applicationsList]);
+  }, [applicationsList, setApplications]);
 
   useEffect(() => {
     let filteredData = filterByStatus(applicationsDataRaw);
